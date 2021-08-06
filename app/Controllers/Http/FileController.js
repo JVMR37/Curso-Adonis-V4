@@ -12,7 +12,6 @@ const Helpers = use('Helpers')
  */
 class FileController {
 
-
   async show({ params, response }) {
     try {
       const file = await File.findOrFail(params.id);
@@ -21,7 +20,6 @@ class FileController {
     } catch (err) {
       return response.status(err.status).send({ error: { message: "Não foi possível buscar o arquivo requerido : (" } })
     }
-
   }
 
 
@@ -58,7 +56,7 @@ class FileController {
 
       return file;
     } catch (err) {
-      return response.status(err.status).send({ error: { message: "Erro no upload de Arquivo !" } })
+      return response.status(err.status).send({ error: { message: "Erro no upload do Arquivo !" } })
     }
   }
 
