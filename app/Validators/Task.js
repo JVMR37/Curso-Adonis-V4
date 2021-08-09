@@ -1,24 +1,21 @@
 'use strict'
-
 const Antl = use('Antl')
-class User {
 
+class Task {
   get validateAll() {
     return true
   }
 
-
   get rules() {
     return {
-      username: 'required|unique:users',
-      email: 'required|email|unique:users',
-      password: 'required|confirmed'
+      title: 'required',
+      due_date: 'date'
     }
-  }
 
+  }
   get messages() {
     return Antl.list('validation')
   }
 }
 
-module.exports = User
+module.exports = Task
