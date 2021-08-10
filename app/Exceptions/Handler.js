@@ -1,5 +1,8 @@
 'use strict'
 
+const Sentry = require('@sentry/node')
+
+const Config = use('Config')
 const Env = use('Env')
 const Youch = use('youch')
 const BaseExceptionHandler = use('BaseExceptionHandler')
@@ -22,7 +25,7 @@ class ExceptionHandler extends BaseExceptionHandler {
    *
    * @return {void}
    */
-   async handle (error, { request, response }) {
+  async handle(error, { request, response }) {
     if (error.name === 'ValidationException') {
       return response.status(error.status).send(error.messages)
     }
@@ -49,7 +52,9 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async report(error) {
-    console.log(error)
+    Sentry.init(Config.get('services.sentry'))
+    Sentry.captureException(error)
+
   }
 }
 
